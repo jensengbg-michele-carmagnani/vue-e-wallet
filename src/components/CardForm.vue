@@ -3,34 +3,25 @@
     <h2>CARD FORM</h2>
     <article class="form">
       <label>Card Number</label>
-      <input
-        type="text"
-        v-model="cardInfo.cardNumber"
-        @keyup.enter="addInfo"
-      />
+      <input type="text" v-model="cardInfo.cardNumber" @keyup="addInfo" />
     </article>
     <article class="form">
       <span>CardHolder name</span>
-      <input type="text" v-model="cardInfo.name" @keyup.enter="addInfo" />
+      <input type="text" v-model="cardInfo.name" @keyup="addInfo" />
     </article>
     <article class=" form valid-ccv">
       <div>
         <span>Valid Truh</span>
-        <input
-          type="text"
-          v-model="cardInfo.valid"
-          @keyup.enter="addInfo(cardInfo)"
-        />
+        <input type="text" v-model="cardInfo.valid" />
       </div>
       <div>
         <span>CCV</span>
-        <input type="text" v-model="cardInfo.ccv" @keyup.enter="addInfo" />
+        <input type="text" v-model="cardInfo.ccv" @keyup="addInfo" />
       </div>
     </article>
     <article class="form">
-      <span>vendor
-      </span>
-      <select class="form" v-model="cardInfo" @keyup.enter="addInfo">
+      <span>vendor </span>
+      <select class="form" v-model="cardInfo.vendor" @click="addInfo">
         <option value="bitcoin">BITCOIN</option>
         <option value="ninjabank">NINJA BANK</option>
         <option value="blockchain">BLOCK CHAIN INC</option>
@@ -43,31 +34,24 @@
 <script>
 export default {
   name: "cardForm",
-
-  data() {
-    return {
-      cardInfo: {
-        cardNumber: "",
-        name: "",
-        valid: "",
-        ccv: "",
-        vendor: "",
-      },
-      methods: {
+   data() {
+        return {
+            cardInfo: {
+                cardNumber: '',
+                name: '',
+                valid: '',
+                ccv: '',
+                vendor: ''
+            }
+        }
+    },
+    methods: {
         addInfo() {
-          let info = {
-            cardNumber: this.cardInfo.cardNumber.value,
-            name: this.cardInfo.name.value,
-            valid: this.cardInfo.valid.value,
-            ccv: this.cardInfo.ccv.value,
-            vendor: this.cardInfo.vendor.value,
-          };
-          this.$emit("cardinfo", info);
-        },
-      },
-    };
-  },
-};
+            this.$emit('cardInfo', this.cardInfo)
+        }
+    }
+}
+
 </script>
 
 <style lang="scss">
@@ -87,13 +71,9 @@ export default {
   .valid-ccv {
     flex-direction: row;
     justify-content: space-between;
-    
   }
-  .valid-ccv  input {
-    
+  .valid-ccv input {
     width: 100px;
-
-
   }
 }
 </style>

@@ -2,8 +2,9 @@
   <main id="addCard">
     <h2>Card to add</h2>
     <Top />
-    <Card @cardinfo="info" :info="info" />
-    <CardForm />
+    <p></p>
+    <Card :cardInfo="cardInfo" />
+    <CardForm @cardInfo="formInfo" />
     <button @click="goBack">addCard</button>
   </main>
 </template>
@@ -20,23 +21,25 @@ export default {
     Card,
     CardForm,
   },
-  data() {
-    return {
-      info: Object,
-    };
+  props: {
+    cardInfo: Object,
   },
-
+  
   methods: {
+    formInfo(value) {
+      this.cardInfo = value;
+      // this.$emit('cardInfo',this.cardInfo)
+    },
     goBack() {
       this.$router.push("/");
     },
-    // checkInfo(){
-
-    //   if(this.cardInfo.cardNumber.length < 16 && this.cardInfo.ccv.length < 3){
-    //         return alert(`info not okay please correct them`)
-    //        }
-    // }
   },
+  // checkInfo(){
+
+  //   if(this.cardInfo.cardNumber.length < 16 && this.cardInfo.ccv.length < 3){
+  //         return alert(`info not okay please correct them`)
+  //        }
+  // }
 };
 </script>
 
