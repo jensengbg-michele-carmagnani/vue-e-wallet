@@ -1,11 +1,29 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view :cardInfo="cardInfo" @cardInfo="listenInfoCard"/>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "app",
+  data() {
+    return {
+      cardInfo: {
+        cardNumber: "",
+        name: "",
+        valid: "",
+        ccv: "",
+        vendor: "",
+      },
+    };
+  },
+  methods:{
+    listenInfoCard(){
+      return this.cardInfo 
+    }
+  }
+};
 </script>
 
 <style lang="scss">

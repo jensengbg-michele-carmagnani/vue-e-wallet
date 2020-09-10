@@ -34,24 +34,29 @@
 <script>
 export default {
   name: "cardForm",
-   data() {
-        return {
-            cardInfo: {
-                cardNumber: '',
-                name: '',
-                valid: '',
-                ccv: '',
-                vendor: ''
-            }
-        }
+  data() {
+    return {
+      cardInfo: {
+        cardNumber: "",
+        name: "",
+        valid: "",
+        ccv: "",
+        vendor: "",
+      },
+    };
+  },
+  methods: {
+    addInfo() {
+      console.log(this.cardInfo);
+      this.$emit("cardInfo", this.cardInfo),
+        this.locaInfo(),
+        console.log(this.cardInfo);
     },
-    methods: {
-        addInfo() {
-            this.$emit('cardInfo', this.cardInfo)
-        }
-    }
-}
-
+    locaInfo() {
+      return sessionStorage.setItem("newCard", this.cardInfo);
+    },
+  },
+};
 </script>
 
 <style lang="scss">

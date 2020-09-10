@@ -2,7 +2,6 @@
   <main id="addCard">
     <h2>Card to add</h2>
     <Top />
-    <p></p>
     <Card :cardInfo="cardInfo" />
     <CardForm @cardInfo="formInfo" />
     <button @click="goBack">addCard</button>
@@ -24,11 +23,20 @@ export default {
   props: {
     cardInfo: Object,
   },
-  
+  data(){
+     return{
+      cardNumber:"",
+       name: "",
+        valid: "",
+        ccv: "",
+        vendor: "",
+    }
+  },
+
   methods: {
     formInfo(value) {
       this.cardInfo = value;
-      // this.$emit('cardInfo',this.cardInfo)
+       this.$emit('cardInfo',this.cardInfo)
     },
     goBack() {
       this.$router.push("/");
