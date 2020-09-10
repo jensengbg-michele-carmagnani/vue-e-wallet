@@ -3,7 +3,7 @@
     <h1>E-wallet</h1>
     <Top />
     <CardStack/>
-    <Card/>
+    <Card :cardInfo="cardInfo"/>
     <button @click="goTo">AddCard</button>
   </div>
 </template>
@@ -20,6 +20,9 @@ export default {
     Top,
     Card,
     CardStack,
+  },
+  props:{
+    cardInfo:Object
   },
   methods: {
     goTo() {

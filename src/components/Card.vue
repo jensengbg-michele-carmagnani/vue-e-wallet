@@ -2,42 +2,48 @@
   <section id="card">
     <article class="vendor">
       <img src alt="chip" />
-      
     </article>
     <article class="number">
-      <p>Card number {{cardInfo.cardNumber}}</p>
+      <p>Card number {{ cardInfo.cardNumber }}</p>
     </article>
-      
+
     <article class="data">
-      <h5>Card number{{cardInfo.name}}</h5>
-      <h4>name</h4>
-      <h5>Valid thru</h5>
-      <h4>Vendor: </h4>
+      <span>Card number</span>
+      <p>{{ infoCard.name }}</p>
+      <span>name</span>
+      <p>{{ infoCard.name }}</p>
+      <span>Valid thru</span>
+      <p>{{ infoCard.Valid }}</p>
+      <span>CCV</span>
+      <p>{{ infoCard.ccv }}</p>
+      <span>Vendor:</span>
+      <p>{{ infoCard.vendor }}</p>
     </article>
   </section>
 </template>
 
 <script>
-
 export default {
   name: "card",
   props: {
     cardInfo: Object,
   },
-  data(){
-    return{
-      cardNumber:"",
-       name: "",
+  data() {
+    return {
+      infos: {
+        cardNumber: "",
+        name: "",
         valid: "",
         ccv: "",
         vendor: "",
-    }
+      },
+    };
   },
-  methods:{
-    info(){
-      console.log(this.cardInfo)
-    }
-  }
+  computed: {
+    infoCard() {
+      return this.cardInfo ;
+    },
+  },
 };
 </script>
 

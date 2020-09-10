@@ -10,18 +10,18 @@
       <input type="text" v-model="cardInfo.name" @keyup="addInfo" />
     </article>
     <article class=" form valid-ccv">
-      <div>
+      <aside class="valid">
         <span>Valid Truh</span>
         <input type="text" v-model="cardInfo.valid" />
-      </div>
-      <div>
+      </aside>
+      <aside class="ccv">
         <span>CCV</span>
         <input type="text" v-model="cardInfo.ccv" @keyup="addInfo" />
-      </div>
+      </aside>
     </article>
     <article class="form">
-      <span>vendor </span>
-      <select class="form" v-model="cardInfo.vendor" @click="addInfo">
+      <span>Vendor </span>
+      <select class="vendor" v-model="cardInfo.vendor" @click="addInfo">
         <option value="bitcoin">BITCOIN</option>
         <option value="ninjabank">NINJA BANK</option>
         <option value="blockchain">BLOCK CHAIN INC</option>
@@ -62,9 +62,13 @@ export default {
 <style lang="scss">
 #cardForm {
   width: 300px;
-  input {
+  input,
+  .vendor {
     width: 100%;
-    padding: 8px;
+    padding: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.376);
+    box-sizing: border-box;
+    border-radius: 5px;
   }
   .form {
     padding: 10px;
@@ -76,9 +80,20 @@ export default {
   .valid-ccv {
     flex-direction: row;
     justify-content: space-between;
-  }
-  .valid-ccv input {
-    width: 100px;
+    align-items: center;
+    input {
+      width: 100px;
+    }
+    .valid {
+      display: flex;
+      justify-content: first start;
+      flex-direction: column;
+    }
+    .ccv {
+      display: flex;
+      justify-content: first start;
+      flex-direction: column;
+    }
   }
 }
 </style>

@@ -19,7 +19,8 @@ export default {
     };
   },
   methods:{
-    listenInfoCard(){
+    listenInfoCard(value){
+      console.log('value app', value)
       return this.cardInfo 
     }
   }
