@@ -1,10 +1,10 @@
 <template>
   <div id="home">
-    <h1>E-wallet</h1>
     <Top />
-    <CardStack/>
-    <Card :cardInfo="cardInfo"/>
-    <button @click="goTo">AddCard</button>
+    <h4>Active card</h4>
+    <Card :cardData="activeCard" />
+    <CardStack :cards="cards" @carddata="setActiveCard" />
+    <button class="addCard" @click="goTo">ADD CARD</button>
   </div>
 </template>
 
@@ -21,23 +21,63 @@ export default {
     Card,
     CardStack,
   },
-  props:{
-    cardInfo:Object
+  props: {
+    cards: Array,
   },
+  data() {
+    return {
+      activeCard: {
+        cardNumber: "",
+        name: "",
+        valid: "",
+        ccv: "",
+        vendor: "",
+      },
+    };
+  },
+  computed: {},
   methods: {
+    setActiveCard(card) {
+      this.activeCard = card;
+    },
     goTo() {
       this.$router.push("/AddCard");
+    },
+    showCard(value) {
+      return (this.cardData = value);
     },
   },
 };
 </script>
 <style lang="scss">
-#home{
+body{
+  display: flex;
+}
+#home {
   display: flex;
   justify-content: center;
-   align-items: center;
-   flex-direction: column;
+  align-items: center;
+  flex-direction: column;
+  min-width: 400px;
+  min-height: 800px;
+  .addNewCard {
+    color: black;
+    background: white;
+    border: 2px solid black;
+    border-radius: 7px;
+    font-size: 18px;
+    margin-bottom: 10%;
+  }
+  .addCard {
+    margin-top: top 1.2rem;
+    width: 280px;
+    height: 45px;
+    color: white;
+    background: black;
+    border: 2px solid brown;
+    border-radius: 7px;
+    font-size: 18px;
+    margin-bottom: 1, 2rem;
+  }
 }
-
-
 </style>

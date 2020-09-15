@@ -1,33 +1,45 @@
 <template>
   <section id="cardForm">
-    <h2>CARD FORM</h2>
     <article class="form">
       <label>Card Number</label>
-      <input type="text" v-model="cardInfo.cardNumber" @keyup="addInfo" />
+      <input
+        type="text"
+        v-model="cardInfo.cardNumber"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+        minlength="16"
+        placeholder="xxxx xxxx xxxx xxxx"
+      />
     </article>
     <article class="form">
       <span>CardHolder name</span>
-      <input type="text" v-model="cardInfo.name" @keyup="addInfo" />
+      <input type="text" v-model="cardInfo.name" placeholder="name & surname" />
     </article>
-    <article class=" form valid-ccv">
+    <article class="form valid-ccv">
       <aside class="valid">
         <span>Valid Truh</span>
-        <input type="text" v-model="cardInfo.valid" />
+        <input type="text" v-model="cardInfo.valid" maxlength="5" placeholder="xx/xx" />
       </aside>
       <aside class="ccv">
         <span>CCV</span>
-        <input type="text" v-model="cardInfo.ccv" @keyup="addInfo" />
+        <input
+          type="text"
+          v-model="cardInfo.ccv"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57 "
+          maxlength="3"
+          placeholder="xxx"
+        />
       </aside>
     </article>
     <article class="form">
-      <span>Vendor </span>
-      <select class="vendor" v-model="cardInfo.vendor" @click="addInfo">
+      <span>Vendor</span>
+      <select class="vendor" v-model="cardInfo.vendor">
         <option value="bitcoin">BITCOIN</option>
-        <option value="ninjabank">NINJA BANK</option>
+        <option value="ninja">NINJA BANK</option>
         <option value="blockchain">BLOCK CHAIN INC</option>
         <option value="evil">EVIL CORPORATION</option>
       </select>
     </article>
+    <button class="addCard" @click="goBack">ADD CARD</button>
   </section>
 </template>
 
@@ -43,17 +55,21 @@ export default {
         ccv: "",
         vendor: "",
       },
+
+      stackCard: [],
     };
   },
   methods: {
     addInfo() {
-      console.log(this.cardInfo);
-      this.$emit("cardInfo", this.cardInfo),
-        this.locaInfo(),
-        console.log(this.cardInfo);
+      this.$emit("cardInfo", this.cardInfo);
     },
-    locaInfo() {
-      return sessionStorage.setItem("newCard", this.cardInfo);
+    locaCard() {
+      return localStorage.setItem("cards", JSON.stringify(this.cardInfo));
+    },
+    goBack() {
+      this.locaCard();
+      this.addInfo();
+      this.$router.push("/");
     },
   },
 };
@@ -94,6 +110,16 @@ export default {
       justify-content: first start;
       flex-direction: column;
     }
+  }
+  .addCard {
+    width: 280px;
+    height: 45px;
+    color: white;
+    background: black;
+    border: 2px solid brown;
+    border-radius: 7px;
+    font-size: 18px;
+    margin: 1.3rem 0;
   }
 }
 </style>

@@ -1,57 +1,142 @@
 <template>
-  <section id="card">
-    <article class="vendor">
-      <img src alt="chip" />
-    </article>
-    <article class="number">
-      <p>Card number {{ cardInfo.cardNumber }}</p>
-    </article>
-
-    <article class="data">
-      <span>Card number</span>
-      <p>{{ infoCard.name }}</p>
-      <span>name</span>
-      <p>{{ infoCard.name }}</p>
-      <span>Valid thru</span>
-      <p>{{ infoCard.Valid }}</p>
-      <span>CCV</span>
-      <p>{{ infoCard.ccv }}</p>
-      <span>Vendor:</span>
-      <p>{{ infoCard.vendor }}</p>
-    </article>
-  </section>
+  <div id="card" :class="heads" @click="showActiveCard">
+    <section id="cardTop">
+      <img id="darkChip" src="@/assets/chip-dark.svg" alt />
+      <img
+        class="vendorImg"
+        v-if="infoCard.vendor == 'bitcoin'"
+        src="@/assets/vendor-bitcoin.svg"
+        alt="vendor"
+      />
+      <img
+        class="vendorImg"
+        v-if="infoCard.vendor == 'evil'"
+        src="@/assets/vendor-evil.svg"
+        alt="vendor"
+      />
+      <img
+        class="vendorImg"
+        v-if="infoCard.vendor == 'ninjabank'"
+        src="@/assets/vendor-ninja.svg"
+        alt="vendor"
+      />
+      <img
+        class="vendorImg"
+        v-if="infoCard.vendor == 'blockchain'"
+        src="@/assets/vendor-blockchain.svg"
+        alt="vendor"
+      />
+    </section>
+    <section id="cardCenter">
+      <h3>{{ infoCard.cardNumber }}</h3>
+    </section>
+    <section id="cardBottom">
+      <p>CARDHOLDER NAME</p>
+      <p>VALID THRU</p>
+    </section>
+    <section id="cardBottomInfo">
+      <h4>{{ infoCard.name }}</h4>
+      <p>{{ infoCard.valid }}</p>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
   name: "card",
   props: {
-    cardInfo: Object,
+    cardData: Object,
   },
   data() {
-    return {
-      infos: {
-        cardNumber: "",
-        name: "",
-        valid: "",
-        ccv: "",
-        vendor: "",
-      },
-    };
+    return {};
+  },
+  methods: {
+    showActiveCard() {
+      this.$emit("carddata", this.cardData);
+    },
   },
   computed: {
     infoCard() {
-      return this.cardInfo ;
+      return this.cardData;
+    },
+    heads() {
+      let vendorClass = "";
+      if (this.cardData.vendor === "bitcoin") {
+        vendorClass = "bitCoin";
+      }
+      if (this.cardData.vendor === "blockchain") {
+        vendorClass = "blockChain";
+      }
+      if (this.cardData.vendor === "evil") {
+        vendorClass = "evil";
+      }
+      if (this.cardData.vendor === "ninja") {
+        vendorClass = "ninja";
+      }
+      return vendorClass;
     },
   },
 };
 </script>
 
-<style lang="scss" scope>
+<style  lang="scss">
 #card {
-  width: 280px;
-  height: 190px;
-  border: 1px solid black;
-  border-radius: 0.6rem;
+  width: 300px;
+  height: 180px;
+
+  border: solid 1px gray;
+  border-radius: 5px;
+  background: rgba(160, 159, 159, 0.158);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  margin-bottom: 4rem;
+  &.bitCoin {
+    background-color: #ffae34;
+  }
+  &.blockChain {
+    background-color: #8b58f9;
+  }
+  &.evil {
+    background-color: #f33355;
+  }
+  &.ninja {
+    background-color: #222222;
+    color: white;
+  }
+}
+#cardTop,
+#cardBottom,
+#cardBottomInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+#darkChip {
+  width: 50px;
+  height: 40px;
+  margin-left: 0.5rem;
+}
+.vendorImg {
+  margin-top: 0.2rem;
+  margin-right: 0.5rem;
+}
+#cardCenter {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  color: white;
+}
+h4 {
+  padding: 0;
+  margin: 0;
 }
 </style>

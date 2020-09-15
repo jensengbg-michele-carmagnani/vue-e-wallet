@@ -1,25 +1,25 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
+Vue.use(VueRouter);
 
-Vue.use(VueRouter)
-
-  const routes = [
+const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/views/Home')
+    path: "/",
+    name: "Home",
+    component: () => import("@/views/Home.vue"),
+    meta: { title: "E-Wallet" },
   },
   {
-    path: '/AddCard',
-    name: 'AddCard',
-    component:()  => import('@/views/AddCard')
+    path: "/AddCard",
+    name: "AddCard",
+    component: () => import("@/views/AddCard.vue"),
+    meta: { title: "ADD A NEW BANK CARD" },
   },
- 
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

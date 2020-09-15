@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :cardInfo="cardInfo" @cardInfo="listenInfoCard"/>
+    <router-view :cards="cards" :cardInfo="cardInfo" @cardInfo="addCard" />
   </div>
 </template>
 
@@ -16,24 +16,48 @@ export default {
         ccv: "",
         vendor: "",
       },
+
+      cards: [],
     };
   },
-  methods:{
-    listenInfoCard(value){
-      console.log('value app', value)
-      return this.cardInfo 
+  methods: {
+    addCard(value) {
+      this.cards.push(value);
+      localStorage.setItem('cards',JSON.stringify(this.cards))
+    },
+
+  },
+  mounted(){
+    let cards = localStorage.getItem('cards')
+    if(cards !== null){
+      this.cards = JSON.parse(cards)
     }
   }
 };
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=PT+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap");
+body{
+  width: 100vw;
+  height: 100vh;
+  background: #eee;
+  
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  max-height: 900px;
+  margin: auto;
 }
 
 #nav {
