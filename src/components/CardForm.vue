@@ -4,7 +4,7 @@
       <label>Card Number</label>
       <input
         type="text"
-        v-model="cardInfo.cardNumber"
+        v-model.number="cardInfo.cardNumber"
         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
         minlength="16"
         placeholder="xxxx xxxx xxxx xxxx"
@@ -23,7 +23,7 @@
         <span>CCV</span>
         <input
           type="text"
-          v-model="cardInfo.ccv"
+          v-model.number="cardInfo.ccv"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57 "
           maxlength="3"
           placeholder="xxx"
